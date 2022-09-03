@@ -1,5 +1,5 @@
 import React from 'react'
-import Card from '../components/NewProjectCard'
+import Card from '../../components/NewProjectCard'
 import Typography from '@mui/material/Typography'
 import { useRouter } from 'next/router'
 import { motion } from 'framer-motion'
