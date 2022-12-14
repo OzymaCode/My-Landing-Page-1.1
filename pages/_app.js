@@ -31,30 +31,28 @@ const MyApp = (props) => {
   const router = useRouter()
   const arrowLeft = (route) => {
     return (
-      <Typography
-        variant="body2"
-        style={{
-          fontSize: '90px',
-          cursor: 'pointer',
+      <motion.div
+        whileHover={{
+          backgroundColor: ['rgba(0, 0, 0, 0)', 'rgba(255, 255, 255, .1)'],
         }}
+        className="h-full flex justify-center items-center cursor-pointer"
         onClick={() => router.push(route)}
       >
-        <BsChevronCompactLeft color="#232b2b" />
-      </Typography>
+        <BsChevronCompactLeft color="#232b2b" size={80} />
+      </motion.div>
     )
   }
   const arrowRight = (route) => {
     return (
-      <Typography
-        variant="body2"
-        style={{
-          fontSize: '90px',
-          cursor: 'pointer',
+      <motion.div
+        whileHover={{
+          backgroundColor: ['rgba(0, 0, 0, 0)', 'rgba(255, 255, 255, .1)'],
         }}
+        className="h-full flex justify-center items-center cursor-pointer"
         onClick={() => router.push(route)}
       >
-        <BsChevronCompactRight color="#232b2b" />
-      </Typography>
+        <BsChevronCompactRight color="#232b2b" size={80} />
+      </motion.div>
     )
   }
   const constraintsRef = useRef(null)
@@ -120,6 +118,30 @@ const MyApp = (props) => {
     transition: { delay: 1 },
   }
 
+  const addArrowTags = (content) => {
+    return (
+      <div className="overflow-x-hidden flex relative z-1 items-center justify-center col m-0 h-full w-full p-0">
+        <div className="lg:inline hidden">
+          {router.pathname == '/' && (
+            <BsChevronCompactLeft style={{ fontSize: '90px', opacity: '0' }} />
+          )}
+          {router.pathname == '/skills' && arrowLeft('/')}
+          {router.pathname == '/portfolio' && arrowLeft('/skills')}
+          {router.pathname == '/contact' && arrowLeft('/portfolio')}
+        </div>
+        <>{content}</>
+        <div className="lg:inline hidden ">
+          {router.pathname == '/' && arrowRight('/skills')}
+          {router.pathname == '/skills' && arrowRight('/portfolio')}
+          {router.pathname == '/portfolio' && arrowRight('/contact')}
+          {router.pathname == '/contact' && (
+            <BsChevronCompactLeft style={{ fontSize: '90px', opacity: '0' }} />
+          )}
+        </div>
+      </div>
+    )
+  }
+
   return (
     <Provider store={store}>
       <CacheProvider value={emotionCache}>
@@ -130,12 +152,7 @@ const MyApp = (props) => {
           <CssBaseline />
           <Header />
           <div className=" fixed z-0 background h-full w-full"></div>
-
-          <div className="overflow-x-hidden flex relative z-1 items-center justify-center col m-0 h-full w-full p-0">
-            {router.pathname == '/' && <div style={{ opacity: 0 }}></div>}
-            {router.pathname == '/skills' && arrowLeft('/')}
-            {router.pathname == '/portfolio' && arrowLeft('/skills')}
-            {router.pathname == '/contact' && arrowLeft('/portfolio')}
+          {addArrowTags(
             <AnimatePresence mode="wait">
               <motion.div
                 initial={{ opacity: 0 }}
@@ -152,14 +169,8 @@ const MyApp = (props) => {
               >
                 <Component {...pageProps} key={router.pathname} />
               </motion.div>
-            </AnimatePresence>
-            {router.pathname == '/' && arrowRight('/skills')}
-            {router.pathname == '/skills' && arrowRight('/portfolio')}
-            {router.pathname == '/portfolio' && arrowRight('/contact')}
-            {router.pathname == '/contact' && (
-              <div style={{ opacity: 0 }}></div>
-            )}
-          </div>
+            </AnimatePresence>,
+          )}
         </ThemeProvider>
       </CacheProvider>
     </Provider>

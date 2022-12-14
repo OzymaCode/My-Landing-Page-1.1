@@ -1,18 +1,18 @@
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import emailjs from 'emailjs-com'
 import Button from '@mui/material/Button'
 import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
-import Toolbar from '@mui/material/Toolbar'
 import Paper from '@mui/material/Paper'
 import Head from 'next/head'
-import { BiCheckboxSquare } from 'react-icons/bi'
 import { MdEmail } from 'react-icons/md'
 import { GoChevronDown } from 'react-icons/go'
 import { MdClose } from 'react-icons/md'
 import { AiOutlineGithub } from 'react-icons/ai'
-import { BsLinkedin } from 'react-icons/bs'
+import { BiCopy } from 'react-icons/bi'
 import { motion } from 'framer-motion'
+import Lottie from 'react-lottie-player'
+import lottieJson from '../public/animations/dark-green-check.json'
 
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
@@ -135,14 +135,42 @@ const Contact = () => {
   }
   const [content, setContent] = useState(email.send)
   const [toggleEmail, setToggleEmail] = useState(false)
+  const [animationSpeed, setAnimationSpeed] = useState({ gmail: 0, github: 0 })
 
-  const skillCard = (title, info, icon, iconColor) => {
+  const copyBtn = (info, type) => {
+    const handleCopy = (value) => {
+      navigator.clipboard.writeText(value)
+      setAnimationSpeed((animationSpeed) => {
+        ;(animationSpeed[type] = 1), animationSpeed
+      })
+    }
+
+    return (
+      <div
+        onClick={() => handleCopy(info)}
+        className="relative flex flex-row justify-center items-center"
+      >
+        <BiCopy className=" text-gray-600 cursor-pointer " size={20} />
+        <Lottie
+          animationData={lottieJson}
+          // speed={animationSpeed}
+          play={true}
+          autoPlay={false}
+          loop={false}
+          className="w-10 h-10 absolute top-0 right-0 left-5 bottom-0 m-auto "
+        />
+        {/* {animationSpeed.gmail} */}
+      </div>
+    )
+  }
+
+  const skillCard = (type, info, icon, iconColor) => {
     return (
       <Paper elevation={5}>
         <Card>
-          <CardContent>
+          <CardContent className="flex flex-row">
             <Typography
-              className="flex items-center font-semibold"
+              className="flex items-center font-semibold pr-10"
               color="text.secondary"
             >
               <span
@@ -155,6 +183,7 @@ const Contact = () => {
               </span>
               {info}
             </Typography>
+            {copyBtn(info, type)}
           </CardContent>
         </Card>
       </Paper>
@@ -200,23 +229,18 @@ const Contact = () => {
         <meta name="" content="" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="children:p-5 w-1/2 h-1/2">
+      <div className="children:p-5 h-1/2 max-w-2xl w-full  ">
         <div>
           {skillCard(
-            'My Information',
+            'gmail',
             'ozymacode@gmail.com',
             <MdEmail size={20} />,
             '#00b9ff',
           )}
         </div>
-        <div
-          className="cursor-pointer"
-          onClick={() =>
-            window.open('https://github.com/OzymaCode', '_blank').focus()
-          }
-        >
+        <div>
           {skillCard(
-            'My Information',
+            'github',
             'github.com/ozymacode',
             <AiOutlineGithub size={20} />,
             '#00b9ff',

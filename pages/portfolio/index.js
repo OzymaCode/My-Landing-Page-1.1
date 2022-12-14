@@ -48,7 +48,7 @@ const Work = () => {
             My Projects
           </Typography>
         </div>
-        <Typography
+        {/* <Typography
           style={{ color: '	#232b2b', fontWeight: '500' }}
           variant="h6"
         >
@@ -60,13 +60,13 @@ const Work = () => {
           >
             (click to find out more...)
           </motion.div>
-        </Typography>
+        </Typography> */}
       </div>
       <div className="flex overflow-hidden justify-around flex-wrap children:lg:m-10 children:m-10">
         {projects.map((project, i) => (
           <motion.div
-            className="cursor-pointer lg:inline justify-center items-center"
-            whileHover={{ scale: 1.2 }}
+            className="cursor-pointer lg:inline lg:hover:scale-105 transition justify-center items-center"
+            // whileHover={{ scale: 1.2 }}
             key={i}
           >
             <Typography

@@ -3,6 +3,7 @@ import Head from 'next/head'
 import Typography from '@mui/material/Typography'
 import { useRouter } from 'next/router'
 import { motion } from 'framer-motion'
+import { HiOutlineFingerPrint } from 'react-icons/hi'
 
 const Home = () => {
   const router = useRouter()
@@ -26,7 +27,7 @@ const Home = () => {
 
   return (
     <div className="h-full w-full">
-      <div className=" w-full h-full flex items-center justify-center">
+      <div className=" w-full h-full flex items-center justify-center flex-col">
         <Head>
           <title>Toby Martiny</title>
           <link rel="icon" href="/favicon.ico" />
@@ -35,15 +36,28 @@ const Home = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           end={{ opacity: 0 }}
-          draggable="true"
+          className="flex justify-center items-center w-full"
         >
-          <Typography
+          <div
             style={{ color: '	#232b2b' }}
-            className="flex justify-center items-center inlinewrap font-bold text-4xl"
+            className="inlinewrap font-bold text-4xl md:px-0 px-5 flex justify-center items-center"
           >
             Hi, I&apos;m Toby and I&apos;m a Software Developer
-          </Typography>
+          </div>
         </motion.div>
+        <div className="relative top-20 left-24 flex justify-center items-center w-full">
+          <motion.div
+            animate={{ opacity: [0, 0.6, 0.6, 0, 0], x: [0, 0, -200, -200] }}
+            transition={{
+              repeat: Infinity,
+              duration: 2,
+              delay: 3,
+              repeatDelay: 3,
+            }}
+          >
+            <HiOutlineFingerPrint size={45} />
+          </motion.div>
+        </div>
       </div>
     </div>
   )

@@ -79,12 +79,28 @@ const Skills = () => {
       </Head>
 
       <div>
-        {skillCard('Languages', ['HTML', 'CSS', 'JavaScript'], '#00b9ff', 0)}
-        {skillCard('Databases', ['MongoDb'], '#ffd728', 0.5)}
+        {skillCard(
+          'Languages',
+          ['HTML', 'CSS', 'JavaScript', 'TypeScript', 'LaTex', 'Solidity'],
+          '#00b9ff',
+          0,
+        )}
+        {skillCard('Databases', ['MongoDb', 'Sanity.io'], '#ffd728', 0.5)}
         {skillCard('Frameworks', ['ReactJS', 'NextJS', 'Redux'], '#16d97e', 1)}
         {skillCard(
           'Other',
-          ['Git', 'REST', 'Express', 'Netlify', 'Heroku'],
+          [
+            'Git',
+            'REST',
+            'Express',
+            'Netlify',
+            'Heroku',
+            'Tailwind',
+            'SCSS',
+            'Stripe',
+            'NextAuth.js',
+            'BlockChain',
+          ],
           '#ff00b2',
           1.5,
         )}
