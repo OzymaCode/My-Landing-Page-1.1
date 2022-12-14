@@ -100,6 +100,7 @@ const Skills = () => {
             'Stripe',
             'NextAuth.js',
             'BlockChain',
+            'Vercel',
           ],
           '#ff00b2',
           1.5,
