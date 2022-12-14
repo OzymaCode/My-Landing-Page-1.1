@@ -21,7 +21,7 @@ const initalState = {
         'TailwindCSS',
       ],
       tab: '/tuvasprint',
-      video: 'https://youtu.be/F6IAr_GLDRY',
+      video: 'https://youtu.be/jsLldr1q4D4',
       link: 'https://tuva-sprint.vercel.app/',
       git: 'https://github.com/OzymaCode/Tuva-Sprint',
     },
